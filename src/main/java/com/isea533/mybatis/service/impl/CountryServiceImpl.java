@@ -17,7 +17,7 @@ import java.util.List;
 public class CountryServiceImpl extends BaseService<Country> implements CountryService {
 
     @Override
-    public List<Country> selectByCountry(Country country, int page, int rows) {
+    public List<Country> selectByCountry(Country country, int pageNum, int pageSize) {
         Example example = new Example(Country.class);
         Example.Criteria criteria = example.createCriteria();
         if (StringUtil.isNotEmpty(country.getCountryname())) {
@@ -30,7 +30,7 @@ public class CountryServiceImpl extends BaseService<Country> implements CountryS
             criteria.andEqualTo("id", country.getId());
         }
         //分页查询
-        PageHelper.startPage(page, rows);
+        PageHelper.startPage(pageNum, pageSize);
         return selectByExample(example);
     }
 
